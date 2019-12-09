@@ -53,6 +53,8 @@ session_start();
 // ROUTAGE //
 /////////////
 
+//Page Accueil
+$app->get('/','\\abeille_mobile\\controllers\\Controller:afficherAccueil');
 
 
 
