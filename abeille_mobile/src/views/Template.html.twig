@@ -8,33 +8,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="{{ root }}/public/lib/jquery/jquery-3.4.1.min.js"></script>
     {% block script %}{% endblock %}
-    <link rel="stylesheet" href="{{ root }}/public/style/css/Ordi.css">
+    <link rel="stylesheet" href="{{ root }}/public/style/css/Header.css">
 
+    <title>Accueil</title>
 
-    <title>Document</title>
-
-    {% block head %}{% endblock %}
+    {% block head %}
+    
+    {% endblock %}
 </head>
 
 <body>
     {% block header %}
-        <ul class="navbar-admin">
-            <div class="titre-navbar-admin">
-                <a href="{{ root }}/">Medianet-Staff</a>
-            </div>
-            <li><div class="divider"></div></li>
-            <li class="item-navbar-admin"><a href="{{ root }}/dashboard">DashBoard</a></li>
-            <li><div class="divider"></div></li>
-            <li class="item-navbar-admin"><a href="{{ root }}/listeDocs">Documents</a></li>
-            <li><div class="divider"></div></li>
-            <li class="item-navbar-admin"><a href="{{ root }}/retours">Rendre</a></li>
-            <li><div class="divider"></div></li>
-            <li class="item-navbar-admin"><a href="{{ root }}/emprunts">Emprunter</a></li>
-            <li><div class="divider"></div></li>
-            <li class="item-navbar-admin"><a href="{{ root }}/voirUsagers">Utilisateurs</a></li>
-            <li><div class="divider"></div></li>
-
-        </ul>
+        <header class="header">
+            <a href="" class="logo">Je suis une abeille</a>
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+            <ul class="menu">
+                <li><a href="#jeu">Règle du jeu</a></li>
+                <li><a href="{{ path_for('fleurs')}}">Les fleurs</a></li>
+                <li><a href="#parcours">Le parcours</a></li>
+                <li><a href="#score">Votre score</a></li>
+            </ul>
+        </header>
     {% endblock %}
 
     <div class="bodyDiv">
