@@ -22,4 +22,16 @@ class Controller extends BaseController
         return $this->render($response, 'Accueil.html.twig');
     } //End of function afficherAccueil
 
+    /**
+     * Fonction permettant d'afficher la liste des fleurs.
+     * @param $request
+     * @param $response
+     * @return mixed
+     */
+    public function voirFleurs($request, $response)
+    {
+        return $this->render($response, 'Accueil.html.twig');
+    } //End of function voirFleurs
+
+
 }
