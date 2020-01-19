@@ -1,0 +1,17 @@
+{% set root = base_url() %}
+{% block head %}
+    <link rel="stylesheet" href="{{ root }}/public/style/css/Navbar.css">
+{% endblock %}
+{% block body %}
+    <div class="test">
+        <ul id="menu">
+            <li><a href="#">Accueil</a></li>
+            <li><a href="{{ path_for('voirFleurs')}}">Gestion des plantes</a>
+                <ul>
+                    <li><a href="{{ path_for('voirFleurs')}}">Voir les fleurs</a></li>
+                    <li><a href="{{ path_for('addFleur')}}">Ajouter une fleur</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

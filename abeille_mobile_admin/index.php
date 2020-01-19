@@ -54,11 +54,17 @@ session_start();
 /////////////
 
 //Page Accueil
-$app->get('/','\\abeille_mobile\\controllers\\Controller:afficherAccueil');
+$app->get('/','\\abeille_mobile_admin\\controllers\\Controller:afficherAccueil');
 
-// Liste des fleurs
-$app->get('/fleurs','\\abeille_mobile\\controllers\\Controller:voirFleurs')->setName('fleurs');
+// Page des gestion de plante
+$app->get('/fleurs','\\abeille_mobile_admin\\controllers\\Controller:voirFleurs')->setName("voirFleurs");
 
+// Page d'ajout de plante + ajout
+$app->get('/addFleur','\\abeille_mobile_admin\\controllers\\Controller:afficherAddFleur')->setName("addFleur");
+$app->post('/addFleur','\\abeille_mobile_admin\\controllers\\Controller:addFleur');
+
+// Supprimer une fleur
+$app->get('/supprFleur/{id}','\\abeille_mobile_admin\\controllers\\Controller:supprFleur');
 
 /////////////
 // RUN     //

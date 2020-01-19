@@ -1,0 +1,13 @@
+{
+	"require": {
+		"illuminate/database": "5.5.*",
+		"php": ">=7",
+		"slim/slim": "3.12",
+		"slim/twig-view": "^2.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"abeille_mobile_admin\\": "src/"
+		}
+	}
+}

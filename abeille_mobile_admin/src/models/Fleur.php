@@ -1,7 +1,7 @@
 <?php
 
 
-namespace abeille_mobile\models;
+namespace abeille_mobile_admin\models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 

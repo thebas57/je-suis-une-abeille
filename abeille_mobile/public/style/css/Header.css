@@ -13,16 +13,13 @@ a {
 .header {
   background-color: yellow;
   box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
-  position: fixed;
+  position: initial;
   width: 100%;
   z-index: 3;
 }
 
 .header ul {
   background-image: url(https://static.lexpress.fr/medias_12015/w_2048,h_1146,c_crop,x_0,y_147/w_480,h_270,c_fill,g_north/v1562131086/abeille-butineuse-le-5-octobre-2018-a-ludwigsburg-allemagne_6151682.jpg);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: contain;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -30,6 +27,7 @@ a {
 }
 
 .header li a {
+  color:white;
   display: block;
   padding: 20px 20px;
   border-right: 1px solid black;

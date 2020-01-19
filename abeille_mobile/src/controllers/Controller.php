@@ -30,8 +30,12 @@ class Controller extends BaseController
      */
     public function voirFleurs($request, $response)
     {
-        return $this->render($response, 'Accueil.html.twig');
+        return $this->render($response, 'Fleurs.html.twig');
     } //End of function voirFleurs
+
+    
+
+
 
 
 }
