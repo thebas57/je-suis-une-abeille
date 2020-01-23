@@ -1,0 +1,17 @@
+.titre-accueil {
+    background-color: #f7efc5;
+    border-radius: 20px;
+}
+
+body {
+    font-family: "Comic Sans MS";
+}
+
+.text-accueil {
+    background-color: #fbc682cc;
+    border-radius: 15px;
+}
+
+.btn-regles {
+    text-align: center;
+}

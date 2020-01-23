@@ -1,0 +1,30 @@
+{% set root = base_url() %}
+{% block head %}
+    <link rel="stylesheet" href="{{ root }}/public/style/css/Navbar.css">
+
+{% endblock %}
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="{{ path_for('accueil')}}"> <img class="navbar-brand" src="{{ root }}/public/images/logo_abeille.png"></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle Navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarMenu" class="navbar-collapse collapse my-2">
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a href="" class="nav-link pl-2">Règles du jeu<i class="fas fa-gamepad ml-2"></i></a></li>
+            <li class="nav-item"><a href="{{ path_for('fleurs')}}" class="nav-link pl-2">Les fleurs<i class="fas fa-leaf ml-2"></i></a></li>
+            <li class="nav-item"><a href="" class="nav-link pl-2">Parcours<i class="fas fa-route ml-2"></i></a></li>
+            <li class="nav-item"><a href="" class="nav-link pl-2">Score<i class="fas fa-star-half-alt ml-2"></i></a></li>
+
+        </ul>
+
+
+    </div>
+
+</nav>
+
+</body>

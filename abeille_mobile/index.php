@@ -54,7 +54,7 @@ session_start();
 /////////////
 
 //Page Accueil
-$app->get('/','\\abeille_mobile\\controllers\\Controller:afficherAccueil');
+$app->get('/','\\abeille_mobile\\controllers\\Controller:afficherAccueil')->setName('accueil');
 
 // Liste des fleurs
 $app->get('/fleurs','\\abeille_mobile\\controllers\\Controller:voirFleurs')->setName('fleurs');
