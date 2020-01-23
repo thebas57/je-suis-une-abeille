@@ -1,6 +1,29 @@
+{% extends "Template.html.twig" %}
 {% set root = base_url() %}
-{% extends 'Template.html.twig' %}
+{% block css %}  {% endblock %}
+
+{% block script %}
+
+{% endblock %}
 
 {% block body %}
-    <h1>zefzef</h1>
+    {{ parent() }}
+    <h1 class="titre">Les plantes</h1>
+
+		{% if fleurs is empty %}
+			Aucune fleur trouvée.
+		{% endif %}
+
+		{% for fleur in fleurs %}
+			<div class="">
+				<b><label>Nom :</label></b>
+				<p>{{fleur.nom}}</p>
+				<b><label>Description :</label></b>
+				<p>{{fleur.description}}</p>
+                <b><label>Points :</label></b>
+				<p>{{fleur.points}}</p>
+			</div>
+		{% endfor %}
+
+
 {% endblock %}
