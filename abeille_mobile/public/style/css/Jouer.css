@@ -41,4 +41,18 @@ body {
   font-weight: bold;
 }
 
+#preview {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  display: none;
+}
+
+#scanOn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  display: block;
+}
+
 /*# sourceMappingURL=jouer.css.map */

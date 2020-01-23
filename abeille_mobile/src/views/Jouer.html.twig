@@ -8,6 +8,9 @@
 
 {% block body %}
 {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
     <div class="col-sm-8 mx-auto my-3">
         <h1 class="titre-jouer text-center py-2">Que la partie commence !</h1>
     </div>
@@ -28,7 +31,11 @@
                 <div class="smalltext">Secondes</div>
             </div>
         </div>
+        <video id="preview"></video>
+        <button onclick="scan()" id="scanOn">Scanner</button>
     </div>
+
+
 
 <script>
 
@@ -70,6 +77,45 @@ function initializeClock(id, endtime) {
 
 var deadline = new Date(Date.parse(new Date()) + 1* 60 * 60 * 1000);
 initializeClock('countdown', deadline);
+
+
+
+function scan(){
+
+    showCam();
+let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+scanner.addListener('scan', function (content) {
+    hideCam();
+    alert(content);
+
+});
+Instascan.Camera.getCameras().then(function (cameras) {
+    if (cameras.length > 0) {
+        scanner.start(cameras[0]);
+    } else {
+        console.error('No cameras found.');
+    }
+}).catch(function (e) {
+    console.error(e);
+});
+}
+
+function hideCam() {
+    document.getElementById("preview").style.display="none";
+    document.getElementById("scanOn").style.display="block";
+}
+
+function showCam() {
+    document.getElementById("preview").style.display="block";
+    document.getElementById("scanOn").style.display="none";
+}
+
+
+
 </script>
+
+
+
+
 
 {% endblock %}
