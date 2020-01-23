@@ -59,6 +59,15 @@ $app->get('/','\\abeille_mobile\\controllers\\Controller:afficherAccueil')->setN
 // Liste des fleurs
 $app->get('/fleurs','\\abeille_mobile\\controllers\\Controller:voirFleurs')->setName('fleurs');
 
+// Regles du jeu
+$app->get('/regles','\\abeille_mobile\\controllers\\Controller:voirRegles')->setName('regles');
+
+// Parcours du jeu
+$app->get('/parcours','\\abeille_mobile\\controllers\\Controller:voirParcours')->setName('parcours');
+
+// Jouer
+$app->get('/jouer','\\abeille_mobile\\controllers\\Controller:commencerPartie')->setName('jouer');
+
 
 /////////////
 // RUN     //

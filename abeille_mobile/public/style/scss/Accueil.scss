@@ -1,0 +1,21 @@
+$bgTitle: #f7efc5;
+$policeCarac: "Comic Sans MS";
+$bgText: #fbc682e6;
+
+.titre-accueil {
+    background-color: #f7efc5;
+    border-radius: 20px;
+}
+
+body {
+    font-family: $policeCarac;
+}
+
+.text-accueil {
+    background-color: $bgText;
+    border-radius: 15px;
+}
+
+.btn-regles {
+    text-align: center;
+}

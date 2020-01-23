@@ -1,4 +1,3 @@
-
 .navbar-nav {
   font-weight: bold;
   font-size: 1.3em;
@@ -18,30 +17,10 @@
   color: black !important;
 }
 
-.btn-outline-success {
-  font-weight: bold;
-}
-.btn-outline-success:hover {
-  color: #fff !important;
-  background-color: #e19a3e !important;
-  border-color: #e19a3e !important;
-}
-
-.btn-search {
-  border-color: #fff !important;
-  color: #fff !important;
-}
-
-.btn-live {
-  border-color: #e19a3e !important;
-  color: #e19a3e !important;
-}
-
 .navbar-brand {
   min-width: 110px;
   max-width: 130px;
 }
-
 
 .nav-link:hover {
   background-color: #e1b83e !important;
@@ -51,5 +30,6 @@
 
 body {
   background-image: url("https://background-tiles.com/overview/yellow/patterns/large/1006.png");
-
 }
+
+/*# sourceMappingURL=Navbar.css.map */

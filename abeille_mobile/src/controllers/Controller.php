@@ -33,7 +33,46 @@ class Controller extends BaseController
         $fleurs = Fleur::all();
 
         return $this->render($response, 'Fleurs.html.twig', ['fleurs' => $fleurs]);
-    } //End of function afficherAccuei
+    } //End of function voirFleurs
+
+
+    /**
+     * Fonction permettant d'afficher les règles.
+     * @param $request
+     * @param $response
+     * @return mixed
+     */
+    public function voirRegles($request, $response)
+    {
+
+        return $this->render($response, 'Regles.html.twig');
+    } //End of function voirRegles
+
+        /**
+     * Fonction permettant d'afficher le parcours.
+     * @param $request
+     * @param $response
+     * @return mixed
+     */
+    public function voirParcours($request, $response)
+    {
+
+        return $this->render($response, 'Parcours.html.twig');
+    } //End of function voirParcours
+
+            /**
+     * Fonction permettant de commencer la partie.
+     * @param $request
+     * @param $response
+     * @return mixed
+     */
+    public function commencerPartie($request, $response)
+    {
+
+        return $this->render($response, 'Jouer.html.twig');
+    } //End of function commencerPartie
+
+
 
     
 

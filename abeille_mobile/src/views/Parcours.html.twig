@@ -1,0 +1,18 @@
+{% set root = base_url() %}
+{% extends 'Template.html.twig' %}
+
+{% block head %}
+{{ parent() }}
+    <link rel="stylesheet" href="{{ root }}/public/style/css/Parcours.css">
+{% endblock %}
+
+{% block body %}
+{{ parent() }}
+    <div class="col-sm-8 mx-auto my-3">
+        <h1 class="titre-parcours text-center py-2">Le parcours</h1>
+    </div>
+
+    <div class="col-12 my-3 parcours py-3 px-4">
+        <img class="img-fluid mx-auto d-block" src="{{ root }}/public/images/plan_jardin.png">
+    </div>
+{% endblock %}

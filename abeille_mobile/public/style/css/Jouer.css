@@ -1,0 +1,44 @@
+.titre-jouer {
+  background-color: #f7efc5;
+  border-radius: 20px;
+}
+
+body {
+  font-family: "Comic Sans MS";
+}
+
+.parti-jeu {
+  background-color: #fbc682e6;
+  border-radius: 15px;
+}
+
+#countdown {
+  color: #fff;
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 30px;
+}
+
+#countdown > div {
+  padding: 10px;
+  border-radius: 3px;
+  background: #FFF393;
+  display: inline-block;
+}
+
+#countdown div > span {
+  padding: 15px;
+  border-radius: 3px;
+  background: #DBA970;
+  display: inline-block;
+}
+
+.smalltext {
+  padding-top: 5px;
+  font-size: 16px;
+  color: black;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=jouer.css.map */

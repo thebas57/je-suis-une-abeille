@@ -1,0 +1,35 @@
+{% set root = base_url() %}
+{% extends 'Template.html.twig' %}
+
+{% block head %}
+{{ parent() }}
+    <link rel="stylesheet" href="{{ root }}/public/style/css/Regles.css">
+{% endblock %}
+
+{% block body %}
+{{ parent() }}
+    <div class="col-sm-8 mx-auto my-3">
+        <h1 class="titre-regles text-center py-2">Règles du jeu</h1>
+    </div>
+
+    <div class="col-sm-8 col-10 mx-auto my-3 text-regles py-3 px-4">
+        <h4 class="text-center">Comment jouer ?</h4>
+        <p>
+        Vous devrez vous déplacer dans le jardin en suivant le parcours définis à l'avance pour remplir des <b>objectifs</b> <i class="fas fa-map-pin"></i> en 
+        recherchant différentes plantes.</br></br>
+        Equipé de votre smartphone ou de votre tablette, vous devrez scanner les <b>QR Codes</b> <i class="fas fa-qrcode"></i> des étiquettes d'un certain 
+        nombre de plantes de façon à accumuler le plus de points possible ! L'idée est de symboliser l'abeille qui butine 
+        les fleurs en nectar ou en pollen.</br>
+        Selon les fleurs butinées, votre score va progresser et votre niveau va augmenter.</br>
+        <hr>
+        <b>ATTENTION !</b> Le temps d'une partie est limitée <i class="far fa-clock"></i>, vous disposez d'une heure pour butiner le plus de fleurs possible.</br>
+        Pour terminer la partie vous devrez rentrer à la ruche (endroit à préciser).</br></br>
+
+        <h3 class="text-center">3, 2, 1, BUTINEZ !!!</h3>
+        </p>
+
+        <div class="btn-play">
+            <a href="{{ path_for('jouer')}}" type="button" class="btn btn-primary">Jouer !</a>
+        </div>
+    </div>
+{% endblock %}

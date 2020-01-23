@@ -12,15 +12,17 @@
         <h1 class="titre-accueil text-center py-1">Accueil</h1>
     </div>
 
-    <div class="col-sm-8 mx-auto my-3 text-accueil py-3 px-4">
-        <p class="text-center">Bienvenu dans l'application <b>Bee Happy</b> !!</p>
-        <p>Bee Happy est un jeu ludo-éducatif mis en place par le jardin botanique de Nancy. </br>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed felis a nunc ornare placerat. Ut tempus, lacus nec ullamcorper convallis, lectus mauris efficitur massa, sed venenatis nibh leo ac odio. Integer sed nibh quis urna dapibus luctus quis vulputate dui. Phasellus ac arcu ante. Donec hendrerit, velit ut porttitor porta, sem ipsum porttitor lectus, non mattis felis elit in erat. 
-        </p>
+    <div class="col-sm-8 col-10 mx-auto my-3 text-accueil py-3 px-4">
+        <blockquote class="text-center">Bienvenu dans l'application <b>Bee Happy</b> !!</blockquote>
+        <blockquote>Bee Happy est un jeu ludo-éducatif mis en place par le jardin botanique Jean-Marie Pelt de <b>Vandoeuvre-les-Nancy</b> basé sur la simulation du travail d'une abeille 
+        qui doit trouver des plantes pour nourrir la ruche.</br>
+        <hr>
+        Le jeu consiste a effectuer une quête de plantes possèdant des caractéristiques particulières dans le jardin en les scannant avec votre appareil.
+        </blockquote>
 
         <div class="btn-regles">
-            <button class="btn btn-primary btn-regles">Les règles</button>
-            <button class="btn btn-primary ">Jouer !</button>
+            <a href="{{ path_for('regles')}}" type="button" class="btn btn-primary">Les règles</a>
+            <a href="{{ path_for('jouer')}}" type="button" class="btn btn-primary">Jouer !</a>
         </div>
     </div>
 {% endblock %}

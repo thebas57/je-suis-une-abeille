@@ -1,0 +1,39 @@
+$colorNavbar: #fde100;
+$policeCaractere: "Comic Sans MS";
+
+
+.navbar-nav {
+    font-weight: bold;
+    font-size: 1.3em;
+  }
+  
+  .navbar {
+    background-color: $colorNavbar !important;
+    font-family: $policeCaractere;
+  }
+  
+  .nabar-toggler {
+    color: rgba(255, 255, 255, 0.51);
+    border-color: rgba(255, 255, 255, 0.62);
+  }
+  
+  .navbar-nav a {
+    color: black !important;
+  }
+  
+  .navbar-brand {
+    min-width: 110px;
+    max-width: 130px;
+  }
+  
+  
+  .nav-link:hover {
+    background-color: #e1b83e !important;
+    color: #fff !important;
+    border-radius: 0.25rem;
+  }
+  
+  body {
+    background-image: url("https://background-tiles.com/overview/yellow/patterns/large/1006.png");
+  
+  }
