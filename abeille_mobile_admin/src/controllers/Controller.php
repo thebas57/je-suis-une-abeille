@@ -72,27 +72,31 @@ class Controller extends BaseController
             $nom = (!empty($_POST['nom'])) ? $_POST['nom'] : null;
             $desc = (!empty($_POST['desc'])) ? $_POST['desc'] : null;
             $pts = (!empty($_POST['pts'])) ? $_POST['pts'] : null;
+            $emplacement = (!empty($_POST['emplacement'])) ? $_POST['emplacement'] : null;
 
             //on verifie que les champs sont tous remplis
-            if (!isset($nom) || !isset($desc) || !isset($pts))
+            if (!isset($nom) || !isset($desc) || !isset($pts) || !isset($emplacement))
                 throw new \Exception("un champs requis n'a pas été rempli");
 
             //on filtre les données
             $nom = filter_var($nom, FILTER_SANITIZE_STRING);
             $desc = filter_var($desc, FILTER_SANITIZE_STRING);
             $pts = filter_var($pts, FILTER_SANITIZE_NUMBER_INT);
+            $emplacement = filter_var($emplacement, FILTER_SANITIZE_NUMBER_INT);
 
             //on les insère en bdd
             $fleur = new Fleur();
             $fleur->nom = $nom;
             $fleur->description = $desc;
             $fleur->points = $pts;
+            $fleur->emplacement = $emplacement;
             $fleur->save();
 
             //libération des variables
             unset($nom);
             unset($desc);
             unset($pts);
+            unset($emplacement);
 
             //redirection
             $fleur = Fleur::all();
