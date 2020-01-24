@@ -7,6 +7,8 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use abeille_mobile_admin\models\Fleur;
+use abeille_mobile_admin\models\Emplacement;
+
 
 class Controller extends BaseController
 {
@@ -31,8 +33,17 @@ class Controller extends BaseController
     public function voirFleurs($request, $response)
     {
         $fleurs = Fleur::all();
+        $emplacement = new Emplacement();
+        $tab = [];
+        foreach ($fleurs as $key => $fleur) {
+            $emplacement = Emplacement::find($fleur->emplacement_id);
+            $tmp = ['emplacement' => $emplacement->nom];
+            array_push($tab, $tmp);
+        }
+        unset($emplacement);
+        unset($tmp);
 
-        return $this->render($response, 'Fleurs.html.twig', ['fleurs' => $fleurs]);
+        return $this->render($response, 'Fleurs.html.twig', ['fleurs' => $fleurs, 'emplacement' => $tab]);
     } //End of function afficherAccuei
 
     /**
@@ -43,7 +54,8 @@ class Controller extends BaseController
      */
     public function afficherAddFleur($request, $response, $args)
     {
-        return $this->render($response, 'AddFleur.html.twig');
+        $emplacement = Emplacement::all();
+        return $this->render($response, 'AddFleur.html.twig', ['emplacements' => $emplacement]);
     } //End of function addEmission
 
     /**
@@ -89,7 +101,7 @@ class Controller extends BaseController
             $fleur->nom = $nom;
             $fleur->description = $desc;
             $fleur->points = $pts;
-            $fleur->emplacement = $emplacement;
+            $fleur->emplacement_id = $emplacement;
             $fleur->save();
 
             //libération des variables
@@ -105,5 +117,41 @@ class Controller extends BaseController
             die($e->getMessage());
         }
     } //end of function addFleur
+
+    /**
+     * Fonction permettant d'afficher la modif des fleurs.
+     * @param $request
+     * @param $response
+     * @return mixed
+     */
+    public function afficherModifFleur($request, $response, $args)
+    {
+        $id = Fleur::find(intVal($args['id']));
+        $emplacement = Emplacement::all();
+        return $this->render($response, 'ModifFleur.html.twig', ['fleur' => $id, 'emplacements' => $emplacement]);
+    } //End of function afficherModifFleur
+
+    /**
+     * Fonction permettant de modifier des fleurs.
+     * @param $request
+     * @param $response
+     * @return mixed
+     */
+    public function modifFleur($request, $response,$args)
+    {
+
+        $fleur = Fleur::find(intVal($args['id']));
+
+        //on les insère en bdd
+        $fleur->nom = $_POST['nom'];
+        $fleur->description = $_POST['desc'];
+        $fleur->points = $_POST['pts'];
+        $fleur->emplacement_id = $_POST['emplacement'];
+        $fleur->save();
+
+        //redirection
+        $fleurs = Fleur::all();
+        return $this->redirect($response, 'voirFleurs');
+    } //end of function modifFleur
 
 }

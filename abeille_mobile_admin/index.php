@@ -66,6 +66,10 @@ $app->post('/addFleur','\\abeille_mobile_admin\\controllers\\Controller:addFleur
 // Supprimer une fleur
 $app->get('/supprFleur/{id}','\\abeille_mobile_admin\\controllers\\Controller:supprFleur');
 
+// Modifier une fleur
+$app->get('/modifFleur{id}','\\abeille_mobile_admin\\controllers\\Controller:afficherModifFleur')->setName('modifFleur');
+$app->post('/modifFleur{id}','\\abeille_mobile_admin\\controllers\\Controller:modifFleur');
+
 /////////////
 // RUN     //
 /////////////
