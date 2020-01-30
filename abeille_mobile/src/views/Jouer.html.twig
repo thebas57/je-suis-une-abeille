@@ -17,7 +17,7 @@
 
     <div class="col-sm-8 col-10 mx-auto my-3 parti-jeu py-3 px-4">
         <p class="text-center">Finis le parcours avant la fin du temps imparti <i class="far fa-laugh-wink"></i></p>
-        <div id="countdown" class="col-12">
+        {# <div id="countdown" class="col-12">
             <div class="mt-2">
                 <span class="hours"></span>
                 <div class="smalltext">Heure</div>
@@ -30,15 +30,29 @@
                 <span class="seconds"></span>
                 <div class="smalltext">Secondes</div>
             </div>
+        </div> #}
+
+        <div class="countdown">
+            <h1 class="header" id="titreDebut">Fin du jeu dans</h1>
+            <h1 class="header" id="titreFin" style="display: none">Fin du jeu !!!!!</h1>
+
+            <div class="square">
+                <div class="digits" id="cd-min">00</div>
+                <div class="text">MINUTES</div>
+            </div>
+            <div class="square">
+                <div class="digits" id="cd-sec">00</div>
+                <div class="text">SECONDS</div>
+            </div>
         </div>
+        <button onclick="scan()" id="scanOn" class="my-2">Scanner</button>
         <video id="preview"></video>
-        <button onclick="scan()" id="scanOn">Scanner</button>
     </div>
 
 
 
 <script>
-
+{# 
 function getTimeRemaining(endtime) {
   var t = Date.parse(endtime) - Date.parse(new Date());
   var seconds = Math.floor((t / 1000) % 60);
@@ -79,7 +93,7 @@ var deadline = new Date(Date.parse(new Date()) + 1* 60 * 60 * 1000);
 initializeClock('countdown', deadline);
 
 
-
+ #}
 function scan(){
 
     showCam();
@@ -110,6 +124,40 @@ function showCam() {
     document.getElementById("scanOn").style.display="none";
 }
 
+
+var counter = {};
+window.addEventListener("load", function () {
+  // COUNTDOWN IN SECONDS
+  // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
+  counter.end = 10;
+
+  // Get the containers
+  counter.min = document.getElementById("cd-min");
+  counter.sec = document.getElementById("cd-sec");
+
+  // Start if not past end date 
+  if (counter.end > 0) {
+    counter.ticker = setInterval(function(){
+      // Stop if passed end time
+      counter.end--;
+      if (counter.end <= 0) { 
+        clearInterval(counter.ticker); 
+        counter.end = 0;
+        document.getElementById("titreFin").style.display="block";
+        document.getElementById("titreDebut").style.display="none";
+      }
+
+      // Calculate remaining time
+      var secs = counter.end;
+      var mins  = Math.floor(secs / 60); // 1 min = 60 secs
+      secs -= mins * 60;
+
+      // Update HTML
+      counter.min.innerHTML = mins;
+      counter.sec.innerHTML = secs;
+    }, 1000);
+  }
+});
 
 
 </script>
