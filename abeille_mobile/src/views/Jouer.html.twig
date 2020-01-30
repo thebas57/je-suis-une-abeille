@@ -94,15 +94,23 @@ initializeClock('countdown', deadline);
 
 
  #}
+
+window.onload = function() {
+    document.getElementById("bout-menu").style.visibility="hidden";
+    document.getElementById("logo-menu").style.pointerEvents= "none";
+
+}
+
 function scan(){
 
     showCam();
-let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-scanner.addListener('scan', function (content) {
+    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    scanner.addListener('scan', function (content) {
     hideCam();
     alert(content);
 
 });
+
 Instascan.Camera.getCameras().then(function (cameras) {
     if (cameras.length > 0) {
         scanner.start(cameras[0]);
@@ -145,6 +153,7 @@ window.addEventListener("load", function () {
         counter.end = 0;
         document.getElementById("titreFin").style.display="block";
         document.getElementById("titreDebut").style.display="none";
+        document.getElementById("scanOn").style.display="none";
       }
 
       // Calculate remaining time

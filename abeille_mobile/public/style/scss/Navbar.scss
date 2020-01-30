@@ -11,6 +11,7 @@ $policeCaractere: "Comic Sans MS";
     background-color: $colorNavbar !important;
     font-family: $policeCaractere;
   }
+
   
   .nabar-toggler {
     color: rgba(255, 255, 255, 0.51);
@@ -25,8 +26,8 @@ $policeCaractere: "Comic Sans MS";
     min-width: 110px;
     max-width: 130px;
   }
-  
-  
+
+
   .nav-link:hover {
     background-color: #e1b83e !important;
     color: #fff !important;
