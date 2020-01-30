@@ -45,8 +45,15 @@
                 <div class="text">SECONDS</div>
             </div>
         </div>
-        <button onclick="scan()" id="scanOn" class="my-2">Scanner</button>
-        <video id="preview"></video>
+        <div>
+            <button onclick="scan()" type="button" id="scanOn" class="btn btn-warning my-2">Scanner</button>
+            <button id="start-jeu" onclick="startGame()" type="button" class="btn btn-info my-2">Commencer</button>
+
+        </div>
+        <div class="espace-video">
+            <video id="preview"></video>
+        </div>
+
     </div>
 
 
@@ -98,7 +105,14 @@ initializeClock('countdown', deadline);
 window.onload = function() {
     document.getElementById("bout-menu").style.visibility="hidden";
     document.getElementById("logo-menu").style.pointerEvents= "none";
+    document.getElementById("scanOn").style.visibility="hidden";
 
+}
+
+function startGame() {
+    document.getElementById("start-jeu").style.visibility= "hidden";
+    document.getElementById("scanOn").style.visibility="visible";
+    setTimer();
 }
 
 function scan(){
@@ -133,9 +147,10 @@ function showCam() {
 }
 
 
-var counter = {};
-window.addEventListener("load", function () {
-  // COUNTDOWN IN SECONDS
+function setTimer() {
+    let counter = {};
+
+// COUNTDOWN IN SECONDS
   // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
   counter.end = 10;
 
@@ -154,6 +169,9 @@ window.addEventListener("load", function () {
         document.getElementById("titreFin").style.display="block";
         document.getElementById("titreDebut").style.display="none";
         document.getElementById("scanOn").style.display="none";
+        document.getElementById("scanOn").style.display="none";
+        document.getElementById("start-jeu").style.visibility= "visible";
+
       }
 
       // Calculate remaining time
@@ -166,7 +184,8 @@ window.addEventListener("load", function () {
       counter.sec.innerHTML = secs;
     }, 1000);
   }
-});
+}
+
 
 
 </script>
