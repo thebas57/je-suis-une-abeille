@@ -16,7 +16,7 @@
 			Aucune fleur trouvée.
 		{% endif %}
 
-		{% for fleur in fleurs %}
+		{% for key,fleur in fleurs %}
 			<div class="fleur">
 				<b><label>Nom :</label></b>
 				<p>{{fleur.nom}}</p>
@@ -24,8 +24,10 @@
 				<p>{{fleur.description}}</p>
                 <b><label>Points :</label></b>
 				<p>{{fleur.points}}</p>
+				<b><label>Emplacement :</label></b>
+				<p>{{emplacement[key].emplacement}}</p>
 				<div class="logo">
-					<i class="far fa-edit fa-2x"></i>
+					<a href="{{ path_for('modifFleur', {'id' : fleur.fleur_id } ) }}" <li><i class="far fa-edit fa-2x"></i></li></a>
 					<a href="#" class="supprFleur" data-id="{{fleur.fleur_id}}"><i class="far fa-trash-alt fa-2x"></i></a>
 					<i class="far fa-eye fa-2x"></i>
 				</div>
