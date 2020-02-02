@@ -1,17 +1,29 @@
 {% set root = base_url() %}
 {% block head %}
     <link rel="stylesheet" href="{{ root }}/public/style/css/Navbar.css">
+
 {% endblock %}
 {% block body %}
-    <div class="test">
-        <ul id="menu">
-            <li><a href="#">Accueil</a></li>
-            <li><a href="{{ path_for('voirFleurs')}}">Gestion des plantes</a>
-                <ul>
-                    <li><a href="{{ path_for('voirFleurs')}}">Voir les fleurs</a></li>
-                    <li><a href="{{ path_for('addFleur')}}">Ajouter une fleur</a></li>
-                </ul>
-            </li>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="{{ path_for('voirFleurs')}}" id="logo-menu"> <img class="navbar-brand" src="{{ root }}/public/images/logo_abeille.png"></a>
+    <h3>PARTIE ADMIN</h3>
+    <button class="navbar-toggler" id="bout-menu" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle Navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarMenu" class="navbar-collapse collapse my-2">
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a href="{{ path_for('voirFleurs')}}" class="nav-link pl-2">Supprimer / modifier les fleurs<i class="fas fa-leaf ml-2"></i></a></li>
+            <li class="nav-item"><a href="{{ path_for('addFleur')}}" class="nav-link pl-2">Ajouter une fleur<i class="fas fa-leaf ml-2"></i></a></li>
         </ul>
+
+
     </div>
+
+</nav>
+
+</body>
 {% endblock %}

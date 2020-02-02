@@ -176,4 +176,22 @@ class Controller extends BaseController
         return $this->redirect($response, 'voirFleurs');
     } //end of function modifFleur
 
+    /**
+     * Fonction permettant de rechercher unefleur.
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return false|string
+     */
+    public function rechercherFleur($request,$response,$args){
+        $critere = $args['critere'];
+        $fleur = null;
+        if (is_numeric($critere)){
+            $fleur = Fleur::find($critere);
+        } else {
+            $fleur = Fleur::where('nomLatin','LIKE',$critere)->first();
+        }
+        return json_encode(['fleur' => $fleur]);
+    }//End of function rechercherFleur
+
 }

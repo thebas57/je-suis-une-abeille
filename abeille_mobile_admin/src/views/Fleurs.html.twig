@@ -10,6 +10,15 @@
     {{ parent() }}
     <h1 class="titre">Les plantes</h1>
 
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="Rechercher une fleur" id="fleurAChercher">
+      <button type="submit" class="searchButton" id="chercherFleur">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+
     <div class="containerF">
 
 		{% if fleurs is empty %}
@@ -18,12 +27,20 @@
 
 		{% for key,fleur in fleurs %}
 			<div class="fleur">
-				<b><label>Nom :</label></b>
-				<p>{{fleur.nom}}</p>
-				<b><label>Description :</label></b>
-				<p>{{fleur.description}}</p>
-                <b><label>Points :</label></b>
-				<p>{{fleur.points}}</p>
+				<b><label>Nom Latin:</label></b>
+				<p>{{fleur.nomLatin}}</p>
+				<b><label>Nom français :</label></b>
+				<p>{{fleur.nomFr}}</p>
+                <b><label>Pollen :</label></b>
+				{{fleur.pollen}}
+				<b><label>Nectar :</label></b>
+				{{fleur.nectar}}
+				<b><label>Hauteur :</label></b>
+				{{fleur.hauteur}}
+				<b><label>Floraison :</label></b>
+				{{fleur.floraison}}</p>
+				<b><label>Couleur :</label></b>
+				{{fleur.couleur}}</p>
 				<b><label>Emplacement :</label></b>
 				<p>{{emplacement[key].emplacement}}</p>
 				<div class="logo">
@@ -47,7 +64,7 @@
 						<img class="img-fluid mx-auto d-block" src="{{ root }}/public/images/{{fleur.illustration}}">
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 					</div>
 				</div>
 			</div>

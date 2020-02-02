@@ -70,6 +70,11 @@ $app->get('/supprFleur/{id}','\\abeille_mobile_admin\\controllers\\Controller:su
 $app->get('/modifFleur{id}','\\abeille_mobile_admin\\controllers\\Controller:afficherModifFleur')->setName('modifFleur');
 $app->post('/modifFleur{id}','\\abeille_mobile_admin\\controllers\\Controller:modifFleur');
 
+// Recherche de fleur
+$app->get('/chercherFleur/{critere}','\\abeille_mobile_admin\\controllers\\Controller:rechercherFleur');
+
+
+
 /////////////
 // RUN     //
 /////////////
