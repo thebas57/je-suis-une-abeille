@@ -48,6 +48,7 @@
         <div>
             <button onclick="scan()" type="button" id="scanOn" class="btn btn-warning my-2">Scanner</button>
             <button id="start-jeu" onclick="startGame()" type="button" class="btn btn-info my-2">Commencer</button>
+            <button id="end-jeu" onclick="endGame()" type="button" class="btn btn-info my-2">Arrêter</button>
 
         </div>
         <div class="espace-video">
@@ -102,18 +103,30 @@ initializeClock('countdown', deadline);
 
  #}
 
+  const counter = {};
+
 window.onload = function() {
     document.getElementById("bout-menu").style.visibility="hidden";
     document.getElementById("logo-menu").style.pointerEvents= "none";
+    document.getElementById("end-jeu").style.visibility= "hidden";
     document.getElementById("scanOn").style.visibility="hidden";
 
 }
 
 function startGame() {
     document.getElementById("start-jeu").style.visibility= "hidden";
+    document.getElementById("end-jeu").style.visibility= "visible";
     document.getElementById("scanOn").style.visibility="visible";
     setTimer();
 }
+
+function endGame() {
+    document.getElementById("end-jeu").style.visibility= "hidden";
+    document.getElementById("start-jeu").style.visibility= "visible";
+    document.getElementById("scanOn").style.visibility="hidden";
+    endTimer();
+}
+
 
 function scan(){
 
@@ -148,7 +161,6 @@ function showCam() {
 
 
 function setTimer() {
-    let counter = {};
 
 // COUNTDOWN IN SECONDS
   // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
@@ -184,6 +196,20 @@ function setTimer() {
       counter.sec.innerHTML = secs;
     }, 1000);
   }
+}
+
+function endTimer() {
+        clearInterval(counter.ticker); 
+        counter.end = 0;
+        document.getElementById("titreFin").style.display="block";
+        document.getElementById("titreDebut").style.display="none";
+        document.getElementById("scanOn").style.display="none";
+        document.getElementById("scanOn").style.display="none";
+        document.getElementById("start-jeu").style.visibility= "visible";
+
+        // Update HTML
+        counter.min.innerHTML = 0;
+        counter.sec.innerHTML = 0;
 }
 
 
