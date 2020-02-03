@@ -55,11 +55,11 @@ body{
 }
 
 .search {
-  width: 50%;
+  /* width: 50%; */
   position: relative;
   display: flex;
   margin:0 auto;
-  padding-bottom:10px;
+  /* padding-bottom:10px; */
 }
 
 .searchTerm {
@@ -74,7 +74,7 @@ body{
 }
 
 .searchTerm:focus{
-  color: yellow;
+  color: black;
 }
 
 .searchButton {
@@ -89,4 +89,7 @@ body{
   font-size: 20px;
 }
 
-
+.recherche {
+  width: 100%;
+  text-align: center;
+}
