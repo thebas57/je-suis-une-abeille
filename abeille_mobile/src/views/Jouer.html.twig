@@ -18,13 +18,13 @@
     <div class="col-sm-8 col-10 mx-auto my-3 parti-jeu py-3 px-4">
         <p class="text-center">Finis le parcours avant la fin du temps imparti <i class="far fa-laugh-wink"></i></p>
         
-        {% set score = 0 %}
         {% for f in fleurs %}
+            {% set score = 0 %}
             <div id="{{ f.id }}" value="{{ f.point }}">
                 Bonjour, je suis {{ f.name }}, {{ f.description }}. Grâce à moi tu ajoutes {{ f.point }} points à ton
                 score !
             </div>
-            {% set score = f.point %}
+            {% set score += {{f.point}} %}
         {% endfor %}
         <div id="score">
             {{ score }}
