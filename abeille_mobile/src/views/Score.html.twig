@@ -1,0 +1,18 @@
+{% set root = base_url() %}
+{% extends 'Template.html.twig' %}
+
+{% block head %}
+{{ parent() }}
+    <link rel="stylesheet" href="{{ root }}/public/style/css/Scores.css">
+{% endblock %}
+
+{% block body %}
+{{ parent() }}
+    <div class="col-sm-8 mx-auto my-3">
+        <h1 class="titre-scores text-center py-2">Les scores</h1>
+    </div>
+
+    <div class="col-sm-8 col-10 mx-auto my-3 tableau-scores py-3 px-4">
+        Le tableau des scores
+    </div>
+{% endblock %}

@@ -1,40 +1,33 @@
-ul {
-    font-family: Arial, Verdana;
-    font-size: 14px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-ul li {
-    display: block;
-    position: relative;
-    float: left;
-}
-li ul {
-    display: none;
-}
-ul li a {
-    display: block;
-    text-decoration: none;
-    color: #ffffff;
-    border-top: 1px solid #ffffff;
-    padding: 5px 15px 5px 15px;
-    background: #1e7c9a;
-    margin-left: 1px;
-    white-space: nowrap;
-}
-ul li a:hover {
-background: #3b3b3b;
-}
-li:hover ul {
-    display: block;
-    position: absolute;
-}
-li:hover li {
-    float: none;
-    font-size: 11px;
-}
-li:hover a { background: #3b3b3b; }
-li:hover li a:hover {
-    background: #1e7c9a;
-}
+.navbar-nav {
+    font-weight: bold;
+    font-size: 1.3em;
+  }
+  
+  .navbar {
+    background-color: #fde100 !important;
+    font-family: "Comic Sans MS";
+  }
+  
+  .nabar-toggler {
+    color: rgba(255, 255, 255, 0.51);
+    border-color: rgba(255, 255, 255, 0.62);
+  }
+  
+  .navbar-nav a {
+    color: black !important;
+  }
+  
+  .navbar-brand {
+    min-width: 110px;
+    max-width: 130px;
+  }
+  
+  .nav-link:hover {
+    background-color: #e1b83e !important;
+    color: #fff !important;
+    border-radius: 0.25rem;
+  }
+
+  
+  /*# sourceMappingURL=Navbar.css.map */
+  

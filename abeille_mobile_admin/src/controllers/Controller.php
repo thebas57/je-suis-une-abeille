@@ -81,34 +81,51 @@ class Controller extends BaseController
     {
         try {
             //on récupère les données du formulaire
-            $nom = (!empty($_POST['nom'])) ? $_POST['nom'] : null;
-            $desc = (!empty($_POST['desc'])) ? $_POST['desc'] : null;
-            $pts = (!empty($_POST['pts'])) ? $_POST['pts'] : null;
+            $nomFr = (!empty($_POST['nomFr'])) ? $_POST['nomFr'] : null;
+            $nomL = (!empty($_POST['nomL'])) ? $_POST['nomL'] : null;
+            $nectar = (!empty($_POST['nectar'])) ? $_POST['nectar'] : null;
+            $pollen = (!empty($_POST['pollen'])) ? $_POST['pollen'] : null;
+            $floraison = (!empty($_POST['floraison'])) ? $_POST['floraison'] : null;
+            $couleur = (!empty($_POST['couleur'])) ? $_POST['couleur'] : null;
+            $hauteur = (!empty($_POST['hauteur'])) ? $_POST['hauteur'] : null;
             $emplacement = (!empty($_POST['emplacement'])) ? $_POST['emplacement'] : null;
 
             //on verifie que les champs sont tous remplis
-            if (!isset($nom) || !isset($desc) || !isset($pts) || !isset($emplacement))
+            if (!isset($nomFr) || !isset($nomL) || !isset($nectar) || !isset($emplacement) || !isset($pollen) || !isset($floraison) || !isset($couleur) || !isset($hauteur))
                 throw new \Exception("un champs requis n'a pas été rempli");
 
             //on filtre les données
-            $nom = filter_var($nom, FILTER_SANITIZE_STRING);
-            $desc = filter_var($desc, FILTER_SANITIZE_STRING);
-            $pts = filter_var($pts, FILTER_SANITIZE_NUMBER_INT);
+            $nomFr = filter_var($nomFr, FILTER_SANITIZE_STRING);
+            $nomL = filter_var($nomL, FILTER_SANITIZE_STRING);
+            $floraison = filter_var($floraison, FILTER_SANITIZE_STRING);
+            $couleur = filter_var($couleur, FILTER_SANITIZE_STRING);
+            $nectar = filter_var($nectar, FILTER_SANITIZE_NUMBER_INT);
+            $pollen = filter_var($pollen, FILTER_SANITIZE_NUMBER_INT);
+            //$hauteur = filter_var($pts, FILTER_SANITIZE_NUMBER_INT);
             $emplacement = filter_var($emplacement, FILTER_SANITIZE_NUMBER_INT);
 
             //on les insère en bdd
             $fleur = new Fleur();
-            $fleur->nom = $nom;
-            $fleur->description = $desc;
-            $fleur->points = $pts;
+            $fleur->nomFr = $nomFr;
+            $fleur->nomLatin = $nomL;
+            $fleur->nectar = $nectar;
+            $fleur->pollen = $pollen;
+            $fleur->hauteur = $hauteur;
+            $fleur->couleur = $couleur;
+            $fleur->floraison = $floraison;
             $fleur->emplacement_id = $emplacement;
+
             $fleur->save();
 
             //libération des variables
-            unset($nom);
-            unset($desc);
-            unset($pts);
+            unset($nomFr);
+            unset($nomL);
+            unset($nectar);
             unset($emplacement);
+            unset($hauteur);
+            unset($couleur);
+            unset($pollen);
+            unset($floraison);
 
             //redirection
             $fleur = Fleur::all();
@@ -143,15 +160,38 @@ class Controller extends BaseController
         $fleur = Fleur::find(intVal($args['id']));
 
         //on les insère en bdd
-        $fleur->nom = $_POST['nom'];
-        $fleur->description = $_POST['desc'];
-        $fleur->points = $_POST['pts'];
+        $fleur->nomFr = $_POST['nomFr'];
+        $fleur->nomLatin = $_POST['nomL'];
+        $fleur->pollen = $_POST['pollen'];
+        $fleur->nectar = $_POST['nectar'];
+        $fleur->floraison = $_POST['floraison'];
+        $fleur->couleur = $_POST['couleur'];
+        $fleur->hauteur = $_POST['hauteur'];
         $fleur->emplacement_id = $_POST['emplacement'];
+
         $fleur->save();
 
         //redirection
         $fleurs = Fleur::all();
         return $this->redirect($response, 'voirFleurs');
     } //end of function modifFleur
+
+    /**
+     * Fonction permettant de rechercher unefleur.
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return false|string
+     */
+    public function rechercherFleur($request,$response,$args){
+        $critere = $args['critere'];
+        $fleur = null;
+        if (is_numeric($critere)){
+            $fleur = Fleur::find($critere);
+        } else {
+            $fleur = Fleur::where('nomLatin','LIKE',$critere)->first();
+        }
+        return json_encode(['fleur' => $fleur]);
+    }//End of function rechercherFleur
 
 }

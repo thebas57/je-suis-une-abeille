@@ -3,6 +3,8 @@
 namespace abeille_mobile\controllers;
 
 use abeille_mobile\models\Fleur;
+use abeille_mobile\models\Emplacement;
+
 use Illuminate\Database\Capsule\Manager as DB;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -31,9 +33,18 @@ class Controller extends BaseController
     public function voirFleurs($request, $response)
     {
         $fleurs = Fleur::all();
+        $emplacement = new Emplacement();
+        $tab = [];
+        foreach ($fleurs as $key => $fleur) {
+            $emplacement = Emplacement::find($fleur->emplacement_id);
+            $tmp = ['emplacement' => $emplacement->nom];
+            array_push($tab, $tmp);
+        }
+        unset($emplacement);
+        unset($tmp);
 
-        return $this->render($response, 'Fleurs.html.twig', ['fleurs' => $fleurs]);
-    } //End of function voirFleurs
+        return $this->render($response, 'Fleurs.html.twig', ['fleurs' => $fleurs, 'emplacement' => $tab]);
+    } //End of function afficherAccuei
 
 
     /**
@@ -79,6 +90,20 @@ class Controller extends BaseController
 
         return $this->render($response, 'Jouer.html.twig', ['fleurs' => $fleur]);
     }
+
+    /**
+     * Fonction permettant de Voir les scores.
+     * @param $request
+     * @param $response
+     * @return mixed
+     */
+    public function voirScores($request, $response)
+    {
+
+        return $this->render($response, 'Score.html.twig');
+    } //End of function commencerPartie
+
+
 
     
 

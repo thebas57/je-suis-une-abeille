@@ -68,6 +68,8 @@ $app->get('/parcours','\\abeille_mobile\\controllers\\Controller:voirParcours')-
 // Jouer
 $app->get('/jouer','\\abeille_mobile\\controllers\\Controller:commencerPartie')->setName('jouer');
 
+// Scores
+$app->get('/scores','\\abeille_mobile\\controllers\\Controller:voirScores')->setName('scores');
 
 /////////////
 // RUN     //

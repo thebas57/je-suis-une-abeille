@@ -44,8 +44,8 @@
         </div>
 
         <div class="countdown">
-            <h1 class="header" id="titreDebut">Fin du jeu dans</h1>
-            <h1 class="header" id="titreFin" style="display: none">Fin du jeu !!!!!</h1>
+            <h1 class="header pt-2" id="titreDebut">Fin du jeu dans</h1>
+            <h1 class="header pt-2" id="titreFin" style="display: none">Fin du jeu !!!!!</h1>
 
             <div class="square">
                 <div class="digits" id="cd-min">00</div>
@@ -53,11 +53,18 @@
             </div>
             <div class="square">
                 <div class="digits" id="cd-sec">00</div>
-                <div class="text">SECONDS</div>
+                <div class="text">SECONDES</div>
             </div>
         </div>
-        <button onclick="scan()" id="scanOn" class="my-2">Scanner</button>
-        <video id="preview"></video>
+        <div class="mt-2 text-center">
+            <button onclick="scan()" type="button" id="scanOn" class="btn btn-warning my-2">Scanner</button>
+            <button id="start-jeu" onclick="startGame()" type="button" class="btn btn-info my-2">Commencer</button>
+            <button id="end-jeu" onclick="endGame()" type="button" class="btn btn-info my-2">Arrêter</button>
+        </div>
+        <div class="espace-video">
+            <video id="preview"></video>
+        </div>
+
     </div>
 
 
@@ -174,6 +181,165 @@
         console.log(fleur)
 
     </script>
+<script>
+{# 
+function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+
+  return {
+    'total': t,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+
+var deadline = new Date(Date.parse(new Date()) + 1* 60 * 60 * 1000);
+initializeClock('countdown', deadline);
+
+
+ #}
+
+  const counter = {};
+
+window.onload = function() {
+    document.getElementById("end-jeu").style.visibility= "hidden";
+    document.getElementById("scanOn").style.visibility="hidden";
+
+}
+
+function startGame() {
+    document.getElementById("start-jeu").style.visibility= "hidden";
+    document.getElementById("end-jeu").style.visibility= "visible";
+    document.getElementById("scanOn").style.visibility="visible";
+    document.getElementById("titreDebut").style.display="block";
+    document.getElementById("titreFin").style.display="none";
+    document.getElementById("bout-menu").style.visibility="hidden";
+    document.getElementById("logo-menu").style.pointerEvents= "none";
+
+    setTimer();
+}
+
+function endGame() {
+    document.getElementById("end-jeu").style.visibility= "hidden";
+    document.getElementById("start-jeu").style.visibility= "visible";
+    document.getElementById("scanOn").style.visibility="hidden";
+    document.getElementById("titreDebut").style.display="block";
+    document.getElementById("titreFin").style.display="none";
+    document.getElementById("bout-menu").style.visibility="visible";
+    document.getElementById("logo-menu").style.pointerEvents= "visible";
+    endTimer();
+}
+
+
+function scan(){
+
+    showCam();
+    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    scanner.addListener('scan', function (content) {
+    hideCam();
+    alert(content);
+
+});
+
+Instascan.Camera.getCameras().then(function (cameras) {
+    if (cameras.length > 0) {
+        scanner.start(cameras[0]);
+    } else {
+        console.error('No cameras found.');
+    }
+}).catch(function (e) {
+    console.error(e);
+});
+}
+
+function hideCam() {
+    document.getElementById("preview").style.visibility="hidden";
+    document.getElementById("scanOn").style.visibility="visible";
+}
+
+function showCam() {
+    document.getElementById("preview").style.visibility="visible";
+    document.getElementById("scanOn").style.visibility="hidden";
+}
+
+
+function setTimer() {
+
+// COUNTDOWN IN SECONDS
+  // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
+  counter.end = 10;
+
+  // Get the containers
+  counter.min = document.getElementById("cd-min");
+  counter.sec = document.getElementById("cd-sec");
+
+  // Start if not past end date 
+  if (counter.end > 0) {
+    counter.ticker = setInterval(function(){
+      // Stop if passed end time
+      counter.end--;
+      if (counter.end <= 0) { 
+        clearInterval(counter.ticker); 
+        counter.end = 0;
+        document.getElementById("titreFin").style.display="block";
+        document.getElementById("titreDebut").style.display="none";
+        document.getElementById("scanOn").style.visibility="hidden";
+        document.getElementById("start-jeu").style.visibility= "visible";
+        document.getElementById("end-jeu").style.visibility= "hidden";
+        document.getElementById("bout-menu").style.visibility="visible";
+        document.getElementById("logo-menu").style.pointerEvents= "visible";
+      }
+
+      // Calculate remaining time
+      var secs = counter.end;
+      var mins  = Math.floor(secs / 60); // 1 min = 60 secs
+      secs -= mins * 60;
+
+      // Update HTML
+      counter.min.innerHTML = mins;
+      counter.sec.innerHTML = secs;
+    }, 1000);
+  }
+}
+
+function endTimer() {
+        clearInterval(counter.ticker); 
+        counter.end = 0;
+
+        // Update HTML
+        counter.min.innerHTML = 0;
+        counter.sec.innerHTML = 0;
+}
+
+
+
+</script>
 
 
 

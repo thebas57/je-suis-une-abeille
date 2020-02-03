@@ -10,6 +10,15 @@
     {{ parent() }}
     <h1 class="titre">Les plantes</h1>
 
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="Rechercher une fleur" id="fleurAChercher">
+      <button type="submit" class="searchButton" id="chercherFleur">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+
     <div class="containerF">
 
 		{% if fleurs is empty %}
@@ -18,21 +27,52 @@
 
 		{% for key,fleur in fleurs %}
 			<div class="fleur">
-				<b><label>Nom :</label></b>
-				<p>{{fleur.nom}}</p>
-				<b><label>Description :</label></b>
-				<p>{{fleur.description}}</p>
-                <b><label>Points :</label></b>
-				<p>{{fleur.points}}</p>
+				<b><label>Nom Latin:</label></b>
+				<p>{{fleur.nomLatin}}</p>
+				<b><label>Nom français :</label></b>
+				<p>{{fleur.nomFr}}</p>
+                <b><label>Pollen :</label></b>
+				{{fleur.pollen}}
+				<b><label>Nectar :</label></b>
+				{{fleur.nectar}}
+				<b><label>Hauteur :</label></b>
+				{{fleur.hauteur}}
+				<b><label>Floraison :</label></b>
+				{{fleur.floraison}}</p>
+				<b><label>Couleur :</label></b>
+				{{fleur.couleur}}</p>
 				<b><label>Emplacement :</label></b>
 				<p>{{emplacement[key].emplacement}}</p>
 				<div class="logo">
 					<a href="{{ path_for('modifFleur', {'id' : fleur.fleur_id } ) }}" <li><i class="far fa-edit fa-2x"></i></li></a>
 					<a href="#" class="supprFleur" data-id="{{fleur.fleur_id}}"><i class="far fa-trash-alt fa-2x"></i></a>
-					<i class="far fa-eye fa-2x"></i>
+					<a data-toggle="modal" data-id="{{fleur.fleur_id}}" data-target="#exampleModal{{fleur.fleur_id}}" href=""><i class="far fa-eye fa-2x"></i></a>
 				</div>
 			</div>
+
+<!-- Modal -->
+		<div class="modal fade" id="exampleModal{{fleur.fleur_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Image de {{fleur.nomFr}}</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<img class="img-fluid mx-auto d-block" src="{{ root }}/public/images/{{fleur.illustration}}">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		{% endfor %}
 	</div>
+
+		
 
 {% endblock %}
