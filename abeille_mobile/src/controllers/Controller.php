@@ -85,6 +85,20 @@ class Controller extends BaseController
 
 
 
+    /**
+     * Fonction permettant de Voir les scores.
+     * @param $request
+     * @param $response
+     * @return mixed
+     */
+    public function voirScores($request, $response)
+    {
+
+        return $this->render($response, 'Score.html.twig');
+    } //End of function commencerPartie
+
+
+
     
 
 

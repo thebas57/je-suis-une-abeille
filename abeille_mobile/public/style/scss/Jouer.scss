@@ -50,12 +50,11 @@ body {
 .countdown {
 	margin: 0 auto;
 	max-width: 350px;
-	background: #000;
-	font-family: Impact, Charcoal, sans-serif;
+	background: #9d5311;;
 	text-align: center;
   }
   .countdown .header {
-	color: #c61d1d;
+	color: #fdda97;
 	text-align: center;
 	font-weight: normal;
 	margin: 5px 0 10px 0;
@@ -67,12 +66,12 @@ body {
   }
   .countdown .digits {
 	font-size: 24px;
-	background: #fff;
+	background: #ffc16b;
 	color: #000;
 	padding: 20px 10px;
 	border-radius: 5px;
   }
   .countdown .text {
 	margin-top: 10px;
-	color: #ddd;
+	color: rgb(255, 255, 255);
   }
