@@ -2,12 +2,12 @@
 {% extends 'Template.html.twig' %}
 
 {% block head %}
-{{ parent() }}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ root }}/public/style/css/Jouer.css">
 {% endblock %}
 
 {% block body %}
-{{ parent() }}
+    {{ parent() }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 
@@ -31,6 +31,17 @@
                 <div class="smalltext">Secondes</div>
             </div>
         </div> #}
+        {% for f in fleurs %}
+            {% set score = 0 %}
+            <div id="{{ f.id }}" value="{{ f.point }}">
+                Bonjour, je suis {{ f.name }}, {{ f.description }}. Grâce à moi tu ajoutes {{ f.point }} points à ton
+                score !
+            </div>
+            {% set score += {{ f.point }} %}
+        {% endfor %}
+        <div id="score">
+            {{ score }}
+        </div>
 
         <div class="countdown">
             <h1 class="header" id="titreDebut">Fin du jeu dans</h1>
@@ -51,116 +62,118 @@
 
 
 
-<script>
-{# 
-function getTimeRemaining(endtime) {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+    <script>
+        {#
+        function getTimeRemaining(endtime) {
+          var t = Date.parse(endtime) - Date.parse(new Date());
+          var seconds = Math.floor((t / 1000) % 60);
+          var minutes = Math.floor((t / 1000 / 60) % 60);
+          var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
 
-  return {
-    'total': t,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
-}
+          return {
+            'total': t,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
+          };
+        }
 
-function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
+        function initializeClock(id, endtime) {
+          var clock = document.getElementById(id);
+          var hoursSpan = clock.querySelector('.hours');
+          var minutesSpan = clock.querySelector('.minutes');
+          var secondsSpan = clock.querySelector('.seconds');
 
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
+          function updateClock() {
+            var t = getTimeRemaining(endtime);
 
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+            hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+            minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+            secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
-  }
+            if (t.total <= 0) {
+              clearInterval(timeinterval);
+            }
+          }
 
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
-}
+          updateClock();
+          var timeinterval = setInterval(updateClock, 1000);
+        }
 
-var deadline = new Date(Date.parse(new Date()) + 1* 60 * 60 * 1000);
-initializeClock('countdown', deadline);
-
-
- #}
-function scan(){
-
-    showCam();
-let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-scanner.addListener('scan', function (content) {
-    hideCam();
-    alert(content);
-
-});
-Instascan.Camera.getCameras().then(function (cameras) {
-    if (cameras.length > 0) {
-        scanner.start(cameras[0]);
-    } else {
-        console.error('No cameras found.');
-    }
-}).catch(function (e) {
-    console.error(e);
-});
-}
-
-function hideCam() {
-    document.getElementById("preview").style.display="none";
-    document.getElementById("scanOn").style.display="block";
-}
-
-function showCam() {
-    document.getElementById("preview").style.display="block";
-    document.getElementById("scanOn").style.display="none";
-}
+        var deadline = new Date(Date.parse(new Date()) + 1* 60 * 60 * 1000);
+        initializeClock('countdown', deadline);
 
 
-var counter = {};
-window.addEventListener("load", function () {
-  // COUNTDOWN IN SECONDS
-  // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
-  counter.end = 10;
+         #}
+        function scan() {
 
-  // Get the containers
-  counter.min = document.getElementById("cd-min");
-  counter.sec = document.getElementById("cd-sec");
+            showCam();
+            let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
+            scanner.addListener('scan', function (content) {
+                hideCam();
+                alert(content);
 
-  // Start if not past end date 
-  if (counter.end > 0) {
-    counter.ticker = setInterval(function(){
-      // Stop if passed end time
-      counter.end--;
-      if (counter.end <= 0) { 
-        clearInterval(counter.ticker); 
-        counter.end = 0;
-        document.getElementById("titreFin").style.display="block";
-        document.getElementById("titreDebut").style.display="none";
-      }
+            });
+            Instascan.Camera.getCameras().then(function (cameras) {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error('No cameras found.');
+                }
+            }).catch(function (e) {
+                console.error(e);
+            });
+        }
 
-      // Calculate remaining time
-      var secs = counter.end;
-      var mins  = Math.floor(secs / 60); // 1 min = 60 secs
-      secs -= mins * 60;
+        function hideCam() {
+            document.getElementById("preview").style.display = "none";
+            document.getElementById("scanOn").style.display = "block";
+        }
 
-      // Update HTML
-      counter.min.innerHTML = mins;
-      counter.sec.innerHTML = secs;
-    }, 1000);
-  }
-});
+        function showCam() {
+            document.getElementById("preview").style.display = "block";
+            document.getElementById("scanOn").style.display = "none";
+        }
 
 
-</script>
+        var counter = {};
+        window.addEventListener("load", function () {
+            // COUNTDOWN IN SECONDS
+            // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
+            counter.end = 10;
+
+            // Get the containers
+            counter.min = document.getElementById("cd-min");
+            counter.sec = document.getElementById("cd-sec");
+
+            // Start if not past end date
+            if (counter.end > 0) {
+                counter.ticker = setInterval(function () {
+                    // Stop if passed end time
+                    counter.end--;
+                    if (counter.end <= 0) {
+                        clearInterval(counter.ticker);
+                        counter.end = 0;
+                        document.getElementById("titreFin").style.display = "block";
+                        document.getElementById("titreDebut").style.display = "none";
+                    }
+
+                    // Calculate remaining time
+                    var secs = counter.end;
+                    var mins = Math.floor(secs / 60); // 1 min = 60 secs
+                    secs -= mins * 60;
+
+                    // Update HTML
+                    counter.min.innerHTML = mins;
+                    counter.sec.innerHTML = secs;
+                }, 1000);
+            }
+        });
+
+        let fleur = document.getElementById({{ f.id }})
+        console.log(fleur)
+
+    </script>
 
 
 
