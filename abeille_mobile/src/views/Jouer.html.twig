@@ -15,6 +15,7 @@
         <h1 class="titre-jouer text-center py-2">Que la partie commence !</h1>
     </div>
 
+
     <div class="col-sm-8 col-10 mx-auto my-3 parti-jeu py-3 px-4">
         <p class="text-center">Finis le parcours avant la fin du temps imparti <i class="far fa-laugh-wink"></i></p>
         {# <div id="countdown" class="col-12">
@@ -31,6 +32,33 @@
                 <div class="smalltext">Secondes</div>
             </div>
         </div> #}
+
+        {#{% for f in fleurs %}
+            {% set score = 0 %}
+            <div id="{{ f.id }}" value="{{ f.point }}">
+                Bonjour, je suis {{ f.name }}, {{ f.description }}. Grâce à moi tu ajoutes {{ f.point }} points à ton
+                score !
+            </div>
+            {% set score += {{f.point}} %}
+        {% endfor %}
+        <div id="score">
+            {{ score }}
+        </div>
+#}
+        {% set score = 0 %}
+        {% for f in fleurs %}
+            <div id="{{ f.fleur_id }}" value="{{ f.nectar }}">
+                Bonjour, je suis {{ f.nomFr }}, mais on m'appelle aussi {{ f.nomLatin }}. Grâce à moi tu ajoutes {{ f.nectar }} points à ton
+                score !
+            </div>
+            {# {% set point = {{ f.point }} %}
+             {% set score = score + point %}
+             #}
+        {% endfor %}
+        <div id="score">
+            {{ score }}
+        </div>
+
         <div class="countdown">
             <h1 class="header pt-2" id="titreDebut">Fin du jeu dans</h1>
             <h1 class="header pt-2" id="titreFin" style="display: none">Fin du jeu !!!!!</h1>
@@ -44,7 +72,7 @@
                 <div class="text">SECONDES</div>
             </div>
         </div>
-        <div id="test" class="mt-2 text-center">
+        <div class="mt-2 text-center">
             <button onclick="scan()" type="button" id="scanOn" class="btn btn-warning my-2">Scanner</button>
             <button id="start-jeu" onclick="startGame()" type="button" class="btn btn-info my-2">Commencer</button>
             <button id="end-jeu" onclick="endGame()" type="button" class="btn btn-info my-2">Arrêter</button>
@@ -106,11 +134,12 @@
             let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
             scanner.addListener('scan', function (content) {
                 hideCam();
-                alert(content);
-                let tes = document.getElementById("test");
-                let divScore = document.createElement("div");
-                divScore.innerText = content;
-                tes.appendChild(divScore);
+                let id = content.split(/\//);
+                for (let i = 2; i < id.length; i++) {
+                    let tes = document.getElementById(id[i]);
+                    console.log(id[i]);
+                    tes.hidden = false;
+                }
             });
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
@@ -134,7 +163,7 @@
         }
 
 
-        var counter = {};
+        /*var counter = {};
         window.addEventListener("load", function () {
             // COUNTDOWN IN SECONDS
             // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
@@ -166,167 +195,126 @@
                     counter.sec.innerHTML = secs;
                 }, 1000);
             }
-        });
+        });*/
     </script>
-<script>
-{# 
-function getTimeRemaining(endtime) {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+    <script>
 
-  return {
-    'total': t,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
-}
+        const counter = {};
 
-function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
+        window.onload = function () {
+            document.getElementById("end-jeu").style.visibility = "hidden";
+            document.getElementById("scanOn").style.visibility = "hidden";
 
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
+        }
 
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+        function startGame() {
+            document.getElementById("start-jeu").style.visibility = "hidden";
+            document.getElementById("end-jeu").style.visibility = "visible";
+            document.getElementById("scanOn").style.visibility = "visible";
+            document.getElementById("titreDebut").style.display = "block";
+            document.getElementById("titreFin").style.display = "none";
+            document.getElementById("bout-menu").style.visibility = "hidden";
+            document.getElementById("logo-menu").style.pointerEvents = "none";
 
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
-  }
+            setTimer();
+        }
 
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
-}
-
-var deadline = new Date(Date.parse(new Date()) + 1* 60 * 60 * 1000);
-initializeClock('countdown', deadline);
+        function endGame() {
+            document.getElementById("end-jeu").style.visibility = "hidden";
+            document.getElementById("start-jeu").style.visibility = "visible";
+            document.getElementById("scanOn").style.visibility = "hidden";
+            document.getElementById("titreDebut").style.display = "block";
+            document.getElementById("titreFin").style.display = "none";
+            document.getElementById("bout-menu").style.visibility = "visible";
+            document.getElementById("logo-menu").style.pointerEvents = "visible";
+            endTimer();
+        }
 
 
- #}
+        function scan() {
 
-  const counter = {};
+            showCam();
+            let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
+            scanner.addListener('scan', function (content) {
+                hideCam();
+                alert(content);
 
-window.onload = function() {
-    document.getElementById("end-jeu").style.visibility= "hidden";
-    document.getElementById("scanOn").style.visibility="hidden";
+            });
 
-}
+            Instascan.Camera.getCameras().then(function (cameras) {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error('No cameras found.');
+                }
+            }).catch(function (e) {
+                console.error(e);
+            });
+        }
 
-function startGame() {
-    document.getElementById("start-jeu").style.visibility= "hidden";
-    document.getElementById("end-jeu").style.visibility= "visible";
-    document.getElementById("scanOn").style.visibility="visible";
-    document.getElementById("titreDebut").style.display="block";
-    document.getElementById("titreFin").style.display="none";
-    document.getElementById("bout-menu").style.visibility="hidden";
-    document.getElementById("logo-menu").style.pointerEvents= "none";
+        function hideCam() {
+            document.getElementById("preview").style.visibility = "hidden";
+            document.getElementById("scanOn").style.visibility = "visible";
+        }
 
-    setTimer();
-}
-
-function endGame() {
-    document.getElementById("end-jeu").style.visibility= "hidden";
-    document.getElementById("start-jeu").style.visibility= "visible";
-    document.getElementById("scanOn").style.visibility="hidden";
-    document.getElementById("titreDebut").style.display="block";
-    document.getElementById("titreFin").style.display="none";
-    document.getElementById("bout-menu").style.visibility="visible";
-    document.getElementById("logo-menu").style.pointerEvents= "visible";
-    endTimer();
-}
+        function showCam() {
+            document.getElementById("preview").style.visibility = "visible";
+            document.getElementById("scanOn").style.visibility = "hidden";
+        }
 
 
-function scan(){
-
-    showCam();
-    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-    scanner.addListener('scan', function (content) {
-    hideCam();
-    alert(content);
-
-});
-
-Instascan.Camera.getCameras().then(function (cameras) {
-    if (cameras.length > 0) {
-        scanner.start(cameras[0]);
-    } else {
-        console.error('No cameras found.');
-    }
-}).catch(function (e) {
-    console.error(e);
-});
-}
-
-function hideCam() {
-    document.getElementById("preview").style.visibility="hidden";
-    document.getElementById("scanOn").style.visibility="visible";
-}
-
-function showCam() {
-    document.getElementById("preview").style.visibility="visible";
-    document.getElementById("scanOn").style.visibility="hidden";
-}
-
-
-function setTimer() {
+        function setTimer() {
 
 // COUNTDOWN IN SECONDS
-  // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
-  counter.end = 10;
+            // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
+            counter.end = 10;
 
-  // Get the containers
-  counter.min = document.getElementById("cd-min");
-  counter.sec = document.getElementById("cd-sec");
+            // Get the containers
+            counter.min = document.getElementById("cd-min");
+            counter.sec = document.getElementById("cd-sec");
 
-  // Start if not past end date 
-  if (counter.end > 0) {
-    counter.ticker = setInterval(function(){
-      // Stop if passed end time
-      counter.end--;
-      if (counter.end <= 0) { 
-        clearInterval(counter.ticker); 
-        counter.end = 0;
-        document.getElementById("titreFin").style.display="block";
-        document.getElementById("titreDebut").style.display="none";
-        document.getElementById("scanOn").style.visibility="hidden";
-        document.getElementById("start-jeu").style.visibility= "visible";
-        document.getElementById("end-jeu").style.visibility= "hidden";
-        document.getElementById("bout-menu").style.visibility="visible";
-        document.getElementById("logo-menu").style.pointerEvents= "visible";
-      }
+            // Start if not past end date
+            if (counter.end > 0) {
+                counter.ticker = setInterval(function () {
+                    // Stop if passed end time
+                    counter.end--;
+                    if (counter.end <= 0) {
+                        clearInterval(counter.ticker);
+                        counter.end = 0;
+                        document.getElementById("titreFin").style.display = "block";
+                        document.getElementById("titreDebut").style.display = "none";
+                        document.getElementById("scanOn").style.visibility = "hidden";
+                        document.getElementById("start-jeu").style.visibility = "visible";
+                        document.getElementById("end-jeu").style.visibility = "hidden";
+                        document.getElementById("bout-menu").style.visibility = "visible";
+                        document.getElementById("logo-menu").style.pointerEvents = "visible";
+                    }
 
-      // Calculate remaining time
-      var secs = counter.end;
-      var mins  = Math.floor(secs / 60); // 1 min = 60 secs
-      secs -= mins * 60;
+                    // Calculate remaining time
+                    var secs = counter.end;
+                    var mins = Math.floor(secs / 60); // 1 min = 60 secs
+                    secs -= mins * 60;
 
-      // Update HTML
-      counter.min.innerHTML = mins;
-      counter.sec.innerHTML = secs;
-    }, 1000);
-  }
-}
+                    // Update HTML
+                    counter.min.innerHTML = mins;
+                    counter.sec.innerHTML = secs;
+                }, 1000);
+            }
+        }
 
-function endTimer() {
-        clearInterval(counter.ticker); 
-        counter.end = 0;
+        function endTimer() {
+            clearInterval(counter.ticker);
+            counter.end = 0;
 
-        // Update HTML
-        counter.min.innerHTML = 0;
-        counter.sec.innerHTML = 0;
-}
+            // Update HTML
+            counter.min.innerHTML = 0;
+            counter.sec.innerHTML = 0;
+        }
 
+        let fleur = document.getElementById({{ f.id }})
+        console.log(fleur)
 
-
-</script>
+    </script>
 
 
 
