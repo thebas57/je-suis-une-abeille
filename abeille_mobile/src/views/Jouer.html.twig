@@ -31,18 +31,6 @@
                 <div class="smalltext">Secondes</div>
             </div>
         </div> #}
-        {% for f in fleurs %}
-            {% set score = 0 %}
-            <div id="{{ f.id }}" value="{{ f.point }}">
-                Bonjour, je suis {{ f.name }}, {{ f.description }}. Grâce à moi tu ajoutes {{ f.point }} points à ton
-                score !
-            </div>
-            {% set score += {{ f.point }} %}
-        {% endfor %}
-        <div id="score">
-            {{ score }}
-        </div>
-
         <div class="countdown">
             <h1 class="header pt-2" id="titreDebut">Fin du jeu dans</h1>
             <h1 class="header pt-2" id="titreFin" style="display: none">Fin du jeu !!!!!</h1>
@@ -56,7 +44,7 @@
                 <div class="text">SECONDES</div>
             </div>
         </div>
-        <div class="mt-2 text-center">
+        <div id="test" class="mt-2 text-center">
             <button onclick="scan()" type="button" id="scanOn" class="btn btn-warning my-2">Scanner</button>
             <button id="start-jeu" onclick="startGame()" type="button" class="btn btn-info my-2">Commencer</button>
             <button id="end-jeu" onclick="endGame()" type="button" class="btn btn-info my-2">Arrêter</button>
@@ -119,7 +107,10 @@
             scanner.addListener('scan', function (content) {
                 hideCam();
                 alert(content);
-
+                let tes = document.getElementById("test");
+                let divScore = document.createElement("div");
+                divScore.innerText = content;
+                tes.appendChild(divScore);
             });
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
@@ -176,10 +167,6 @@
                 }, 1000);
             }
         });
-
-        let fleur = document.getElementById({{ f.id }})
-        console.log(fleur)
-
     </script>
 <script>
 {# 

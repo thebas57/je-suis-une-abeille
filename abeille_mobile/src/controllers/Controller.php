@@ -88,7 +88,7 @@ class Controller extends BaseController
 
         $fleur = Fleur::all();
 
-        return $this->render($response, 'Jouer.html.twig', ['fleurs' => $fleur]);
+        return $this->render($response, 'Accueil.html.twig', ['fleurs' => $fleur]);
     }
 
     /**
