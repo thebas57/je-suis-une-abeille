@@ -45,19 +45,14 @@
             {{ score }}
         </div>
 #}
+
         {% set score = 0 %}
         {% for f in fleurs %}
-            <div id="{{ f.fleur_id }}" value="{{ f.nectar }}">
-                Bonjour, je suis {{ f.nomFr }}, mais on m'appelle aussi {{ f.nomLatin }}. Grâce à moi tu ajoutes {{ f.nectar }} points à ton
-                score !
+            <div hidden id="{{ f.fleur_id }}" value="{{ f.nectar }}">
+                Bonjour, je suis {{ f.nomFr }}, mais on m'appelle aussi {{ f.nomLatin }}. Tu ajoutes {{ f.nectar }} points à ton score !
             </div>
-            {# {% set point = {{ f.point }} %}
-             {% set score = score + point %}
-             #}
+            {% set point = f.nectar %}
         {% endfor %}
-        <div id="score">
-            {{ score }}
-        </div>
 
         <div class="countdown">
             <h1 class="header pt-2" id="titreDebut">Fin du jeu dans</h1>
@@ -136,9 +131,10 @@
                 hideCam();
                 let id = content.split(/\//);
                 for (let i = 2; i < id.length; i++) {
-                    let tes = document.getElementById(id[i]);
+                    const idPrec = id[i];
+                    let divFleur = document.getElementById(id[i]);
                     console.log(id[i]);
-                    tes.hidden = false;
+                    divFleur.hidden = false;
                 }
             });
             Instascan.Camera.getCameras().then(function (cameras) {
@@ -231,7 +227,7 @@
         }
 
 
-        function scan() {
+        /*function scan() {
 
             showCam();
             let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
@@ -250,7 +246,7 @@
             }).catch(function (e) {
                 console.error(e);
             });
-        }
+        }*/
 
         function hideCam() {
             document.getElementById("preview").style.visibility = "hidden";

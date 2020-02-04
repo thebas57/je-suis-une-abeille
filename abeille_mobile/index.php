@@ -71,6 +71,8 @@ $app->get('/jouer','\\abeille_mobile\\controllers\\Controller:commencerPartie')-
 // Scores
 $app->get('/scores','\\abeille_mobile\\controllers\\Controller:voirScores')->setName('scores');
 
+
+
 /////////////
 // RUN     //
 /////////////

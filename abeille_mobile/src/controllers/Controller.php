@@ -79,17 +79,10 @@ class Controller extends BaseController
      */
     public function commencerPartie($request, $response)
     {
-
-        return $this->render($response, 'Jouer.html.twig');
+        $fleurs = Fleur::all();
+        return $this->render($response, 'Jouer.html.twig', ['fleurs' => $fleurs]);
     } //End of function commencerPartie
 
-
-    public function getScore($request, $response){
-
-        $fleur = Fleur::all();
-
-        return $this->render($response, 'Jouer.html.twig', ['fleurs' => $fleur]);
-    }
 
     /**
      * Fonction permettant de Voir les scores.
